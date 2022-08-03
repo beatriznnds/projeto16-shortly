@@ -27,7 +27,6 @@ export async function signIn (req, res) {
         await connection.query(`INSERT INTO sessions (token, "userId") VALUES ($1, $2)`, [token, id]);
         res.status(200).send(token);
     } catch (e) {
-        console.log(e)
         res.sendStatus(500);
     }
 
