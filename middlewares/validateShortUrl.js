@@ -1,7 +1,6 @@
-import { valid } from "joi";
 import connection from "../database.js";
 
-export async function validateNewUrl (req, res, next) {
+export async function validateShortUrl (req, res, next) {
     const { id } = req.params;
     try {
         const { rows: validId } = await connection.query(`SELECT * FROM urls WHERE id = $1`, [id]);
