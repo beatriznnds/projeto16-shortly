@@ -26,10 +26,20 @@ export async function getUrlById (req, res) {
 export async function getShortUrl (req, res) {
     const { shortUrl } = req.params;
     try {
-        const { rows: searchedShortUrl } = await connection.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
-        await connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [views +1], searchedShortUrl[0].id);
+        const { rows: searchedShortUrl }  = await connection.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
+        const newView = Number(searchedShortUrl[0].views) + 1;
+        await connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [newView, searchedShortUrl[0].id]);
         res.redirect(searchedShortUrl[0].url)
     } catch (e) {
+        console.log(e)
         res.sendStatus(500);
+    }
+}
+
+export async function deleteUrl (req, res) {
+    try {
+
+    } catch (e) {
+        
     }
 }
