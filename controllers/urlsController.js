@@ -22,3 +22,14 @@ export async function getUrlById (req, res) {
         res.sendStatus(500);
     }
 }
+
+export async function getShortUrl (req, res) {
+    const { shortUrl } = req.params;
+    try {
+        const { rows: searchedShortUrl } = await connection.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
+        await connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [views +1], searchedShortUrl[0].id);
+        res.redirect(searchedShortUrl[0].url)
+    } catch (e) {
+        res.sendStatus(500);
+    }
+}
