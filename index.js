@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { application } from 'express';
 import cors from 'cors';
 import dotenv from "dotenv";
 import authRouter from './routes/authRouter.js';
@@ -16,6 +16,7 @@ app.use(authRouter);
 app.use(urlsRouter);
 app.use(userRouter);
 app.use(rankingRouter);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT);
