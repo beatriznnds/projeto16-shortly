@@ -31,15 +31,16 @@ export async function getShortUrl (req, res) {
         await connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [newView, searchedShortUrl[0].id]);
         res.redirect(searchedShortUrl[0].url)
     } catch (e) {
-        console.log(e)
         res.sendStatus(500);
     }
 }
 
 export async function deleteUrl (req, res) {
+    const { id } = req.params;
     try {
-
+        await connection.query(`DELETE FROM urls WHERE id = $1`, [id]);
+        res.sendStatus(204);
     } catch (e) {
-        
+        res.sendStatus(500);
     }
 }
