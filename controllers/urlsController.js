@@ -3,12 +3,13 @@ import { urlRepository } from "../repositories/urlRepository.js";
 
 export async function makeShortUrl (req, res) {
     const { url } = req.body;
-    const { token } = res.locals;
+    const { userId } = res.locals;
     try {
         const shortUrl = nanoid();
-        await urlRepository.addNewShortUrl(shortUrl, url, token[0].userId);
+        await urlRepository.addNewShortUrl(shortUrl, url, userId);
         res.status(201).send({ shortUrl });
     } catch (e) {
+        console.log(e)
         res.sendStatus(500);
     }
 }

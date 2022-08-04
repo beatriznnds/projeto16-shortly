@@ -8,7 +8,7 @@ export async function validateToken (req, res, next) {
         if (validToken.length === 0) {
             return res.sendStatus(401);
         }
-        res.locals.token = validToken;
+        res.locals.userId = validToken[0].userId;
     } catch (e) {
         res.sendStatus(500);
     }

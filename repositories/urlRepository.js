@@ -1,15 +1,15 @@
 import connection from "../database.js";
 
-async function addNewShortUrl (url, shortUrl, id) {
-    return connection.query(`INSERT INTO urls ("shortUrl", url, "userId") VALUES ($1, $2, $3)`, [shortUrl, url, token[0].userId]);
+async function addNewShortUrl (shortUrl, url, id) {
+    return connection.query(`INSERT INTO urls ("shortUrl", url, "userId") VALUES ($1, $2, $3)`, [shortUrl, url, id]);
 }
 
 async function searchUrlById (id) {
     return connection.query(`SELECT * FROM urls WHERE id = $1`, [id]);
 }
 
-async function addNewView (shortUrl) {
-    return connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [newView, searchedShortUrl[0].id]);
+async function addNewView (newView, shortUrl) {
+    return connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [newView, shortUrl]);
 }
 
 async function searchShortUrl (shortUrl) {
