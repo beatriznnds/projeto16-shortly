@@ -25,9 +25,9 @@ export async function signIn (req, res) {
         const token = uuid();
         const id = validUser.rows[0].id;
         await userRepository.login(token, id);
-        res.status(200).send(token);
+        return res.status(200).send(token);
     } catch (e) {
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 
 }

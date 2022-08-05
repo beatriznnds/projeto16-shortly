@@ -10,7 +10,7 @@ export async function validateToken (req, res, next) {
         }
         res.locals.userId = validToken[0].userId;
     } catch (e) {
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
     next();
 };

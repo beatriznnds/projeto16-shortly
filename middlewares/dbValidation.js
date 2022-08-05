@@ -8,7 +8,7 @@ export async function validateNewUser (req, res, next) {
             return res.sendStatus(409);
         }
     } catch (e) {
-        res.sendStatus(500);
+       return res.sendStatus(500);
     }
     next();
 }

@@ -7,10 +7,10 @@ export async function makeShortUrl (req, res) {
     try {
         const shortUrl = nanoid();
         await urlRepository.addNewShortUrl(shortUrl, url, userId);
-        res.status(201).send({ shortUrl });
+        return res.status(201).send({ shortUrl });
     } catch (e) {
         console.log(e)
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 }
 
@@ -18,9 +18,9 @@ export async function getUrlById (req, res) {
     const { id } = req.params;
     try {
         const { rows: searchedUrl } = await urlRepository.searchUrlById(id);
-        res.status(200).send(searchedUrl);
+        return res.status(200).send(searchedUrl);
     } catch (e) {
-        res.sendStatus(500);
+       return res.sendStatus(500);
     }
 }
 
@@ -30,9 +30,9 @@ export async function getShortUrl (req, res) {
         const { rows: searchedShortUrl }  = await urlRepository.searchShortUrl(shortUrl);
         const newView = Number(searchedShortUrl[0].views) + 1;
         await urlRepository.addNewView(newView, searchedShortUrl[0].id);
-        res.redirect(searchedShortUrl[0].url)
+        return res.redirect(searchedShortUrl[0].url)
     } catch (e) {
-        res.sendStatus(500);
+       return res.sendStatus(500);
     }
 }
 
@@ -40,8 +40,8 @@ export async function deleteUrl (req, res) {
     const { id } = req.params;
     try {
         await urlRepository.deleteUrl(id);
-        res.sendStatus(204);
+        return res.sendStatus(204);
     } catch (e) {
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 }

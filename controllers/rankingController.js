@@ -8,9 +8,9 @@ export async function getViews (req, res) {
         GROUP BY users.name, urls."userId"
         ORDER BY "visitCount" DESC
         LIMIT 10`);
-        res.send(body).status(200);
+        return res.send(body).status(200);
     } catch (e) {
         console.log(e)
-        res.sendStatus(500);
+       return res.sendStatus(500);
     }
 }

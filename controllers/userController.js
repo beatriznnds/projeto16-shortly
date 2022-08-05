@@ -7,10 +7,10 @@ export async function getMyUrls (req, res) {
         const { rows: userUrlsVisits } = await userRepository.getViewsFromUser(userId)
         const { rows: urlsFromUser } = await userRepository.getUrlsFromUser(userId);
         const info = { ...userUrlsVisits[0], shortenedUrls: urlsFromUser };
-        res.send(info).status(200);
+        return res.send(info).status(200);
 
     } catch (e) {
         console.log(e)
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 }
