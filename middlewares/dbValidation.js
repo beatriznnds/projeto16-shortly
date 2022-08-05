@@ -72,8 +72,8 @@ export async function validateUserUrl (req, res, next) {
         if (validId.length === 0) {
             return res.sendStatus(404)
         };
-        if (validToken.userId !== validId.userId) {
-            return res.sendStatus(401)
+        if (validToken[0].userId !== validId[0].userId) {
+            return res.sendStatus(401);
         }
     } catch (e) {
         return res.sendStatus(500);
