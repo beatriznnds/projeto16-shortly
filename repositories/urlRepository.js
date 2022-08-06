@@ -12,7 +12,7 @@ async function addNewView (newView, shortUrl) {
     return connection.query(`UPDATE urls SET views = $1 WHERE id = $2`, [newView, shortUrl]);
 }
 
-async function searchShortUrl (shortUrl) {
+async function searchShortUrl shortUrl) {
     return connection.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
 }
 
