@@ -6,7 +6,7 @@ export async function getViews (req, res) {
         COALESCE(SUM(urls.views),0) AS "visitCount"
         FROM users
         LEFT JOIN urls ON users.id = urls."userId"
-        GROUP BY users.name, users.id
+        GROUP BY users.name, urls."userId"
         ORDER BY "visitCount" DESC
         LIMIT 10`);
         return res.send(body).status(200);
