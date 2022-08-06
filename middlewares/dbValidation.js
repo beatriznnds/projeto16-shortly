@@ -49,7 +49,7 @@ export async function validateUser (req, res, next) {
         if (validToken.length === 0) {
             return res.sendStatus(401);
         };
-        if (validToken.userId !== userId) {
+        if (validToken[0].userId !== userId) {
             return res.sendStatus(404);
         }
         res.locals.userId = validToken[0].userId;
