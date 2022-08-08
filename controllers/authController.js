@@ -17,14 +17,17 @@ export async function signIn (req, res) {
     const { email, password } = req.body;    
     try {
         const validUser = await userRepository.searchUserByEmail(email);
+        const userRows = validUser.rows[0];
         if (validUser.rowCount === 0 ) {
-            
-        }
-        const checkPassword = bcrypt.compareSync(password, validUser.rows[0].password);
-        if (!checkPassword) {
             return res.sendStatus(401);
         }
-        res.locals.user = validUser;
+        if (bcrypt.compareSync(password, userRows.password)) {
+            res.locals.user = validUser;
+        }
+        else {
+            return res.sendStatus(401);
+        }
+       
         const token = uuid();
         const id = validUser.rows[0].id;
         await userRepository.login(token, id);
